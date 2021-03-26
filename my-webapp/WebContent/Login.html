@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Login Form</title>
+<script>
+function getParameterByName(name, url = window.location.href) {
+    name = name.replace(/[\[\]]/g, '\\$&');
+    var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, ' '));
+}
+
+function checkError(){
+	var error= getParameterByName('error');
+	if(error== 111)
+		document.getElementById("msg").innerHTML = "Invalid username/password";
+		
+	
+	else if(error==222)
+		document.getElementById("msg").innerHTML = "Captcha Verification Failed";
+		
+	
+}
+</script>
+</head>
+<body onload="checkError()">
+<div id="msg"></div>
+<form action="login.lti" method="post">
+	Enter username: <input type="text" name="username" /> <br />
+	Enter Password: <input type="password" name="password" /><br />
+	Remember Me: <input type="checkbox" name="rememberMe" value="yes" /> <br />
+	Captcha: <img src="captcha.jpg" /> <br />
+	Enter Captcha Text: <input type="text" name="CaptchaText" /> <br />
+	<button type="submit">Login</button>
+</form>
+
+</body>
+</html>
